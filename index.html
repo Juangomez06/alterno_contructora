@@ -1,0 +1,402 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Alterno Constructora - Construyendo el Futuro</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+
+<body>
+    <!-- Navigation -->
+    <nav class="navbar" id="navbar">
+        <div class="nav-container">
+            <div class="nav-logo">
+                <h2>Alterno</h2>
+                <span>Constructora</span>
+            </div>
+            <ul class="nav-menu" id="nav-menu">
+                <li class="nav-item">
+                    <a href="#inicio" class="nav-link active" data-section="inicio">Inicio</a>
+                </li>
+                <li class="nav-item">
+                    <a href="#servicios" class="nav-link" data-section="servicios">Servicios</a>
+                </li>
+                <li class="nav-item">
+                    <a href="#proyectos" class="nav-link" data-section="proyectos">Proyectos</a>
+                </li>
+                <li class="nav-item">
+                    <a href="#nosotros" class="nav-link" data-section="nosotros">Nosotros</a>
+                </li>
+                <li class="nav-item">
+                    <a href="#ingenieros" class="nav-link" data-section="ingenieros">Equipo</a>
+                </li>
+                <li class="nav-item">
+                    <a href="#contacto" class="nav-link" data-section="contacto">Contacto</a>
+                </li>
+            </ul>
+            <div class="hamburger" id="hamburger">
+                <span class="bar"></span>
+                <span class="bar"></span>
+                <span class="bar"></span>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section id="inicio" class="hero">
+        <div class="hero-container">
+            <!-- Contenido Principal -->
+            <div class="hero-main-content">
+                <h1 class="hero-title">Construimos tu <span class="highlight">Futuro</span></h1>
+                <p class="hero-subtitle">Transformamos ideas en realidades arquitectónicas con excelencia, innovación y
+                    compromiso</p>
+                <div class="hero-buttons">
+                    <a href="#proyectos" class="btn btn-primary">Ver Proyectos</a>
+                    <a href="#contacto" class="btn btn-secondary">Contactar</a>
+                </div>
+            </div>
+
+            <!-- Contador Derecho -->
+            <div class="hero-counter right-counter">
+                <div class="counter-content">
+                    <h3 class="counter-number" data-target="20">20</h3>
+                    <p class="counter-label">Proyectos<br>Completados</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+
+
+    <!-- Services Section -->
+    <section id="servicios" class="services" style="padding: 30px;">
+        <div class="container">
+            <div class="section-header">
+                <h2>Nuestros Servicios</h2>
+                <p>Ofrecemos soluciones integrales para cada etapa de tu proyecto</p>
+            </div>
+            <div class="services-grid">
+                <div class="service-card">
+                    <div class="service-icon">🏗️</div>
+                    <h3>Construcción Residencial</h3>
+                    <p>Casas y edificios residenciales con los más altos estándares de calidad</p>
+                </div>
+                <div class="service-card">
+                    <div class="service-icon">🏢</div>
+                    <h3>Construcción Comercial</h3>
+                    <p>Espacios comerciales e industriales diseñados para el éxito de tu negocio</p>
+                </div>
+                <div class="service-card">
+                    <div class="service-icon">📐</div>
+                    <h3>Diseño Arquitectónico</h3>
+                    <p>Proyectos únicos que combinan funcionalidad y estética moderna</p>
+                </div>
+                <div class="service-card">
+                    <div class="service-icon">🔧</div>
+                    <h3>Remodelaciones</h3>
+                    <p>Renovamos y modernizamos espacios existentes con visión innovadora</p>
+                </div>
+                <div class="service-card">
+                    <div class="service-icon">🌱</div>
+                    <h3>Construcción Sustentable</h3>
+                    <p>Edificaciones eco-amigables con certificaciones LEED y materiales sostenibles</p>
+                </div>
+                <div class="service-card">
+                    <div class="service-icon">📊</div>
+                    <h3>Gestión de Proyectos</h3>
+                    <p>Administración integral de proyectos desde la planificación hasta la entrega final</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Featured Projects Section -->
+    <section id="proyectos" class="projects" style="padding: 40px;">
+        <div class="container">
+            <div class="section-header">
+                <h2>Proyectos Destacados</h2>
+                <p>Algunos de nuestros trabajos más representativos</p>
+            </div>
+            <div class="projects-carousel-container">
+                <button class="carousel-arrow carousel-arrow-left" aria-label="Proyecto anterior">❮</button>
+                <div class="projects-carousel">
+                    <div class="projects-track">
+                        <div class="project-slide">
+                            <div class="project-card" data-project="0">
+                                <div class="project-image project-image-1"></div>
+                                <div class="project-info">
+                                    <h3>Residencial Vista Verde</h3>
+                                    <p>Complejo residencial de 120 unidades con áreas verdes y amenidades modernas</p>
+                                    <span class="project-category">Residencial</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="project-slide">
+                            <div class="project-card" data-project="1">
+                                <div class="project-image project-image-2"></div>
+                                <div class="project-info">
+                                    <h3>Centro Comercial Plaza Norte</h3>
+                                    <p>Moderno centro comercial con diseño sustentable y tecnología de vanguardia</p>
+                                    <span class="project-category">Comercial</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="project-slide">
+                            <div class="project-card" data-project="2">
+                                <div class="project-image project-image-3"></div>
+                                <div class="project-info">
+                                    <h3>Torre Corporativa Alterno</h3>
+                                    <p>Edificio de oficinas de 25 pisos con certificación LEED Gold</p>
+                                    <span class="project-category">Corporativo</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="project-slide">
+                            <div class="project-card" data-project="3">
+                                <div class="project-image project-image-4"></div>
+                                <div class="project-info">
+                                    <h3>Hospital Metropolitano</h3>
+                                    <p>Centro médico de última generación con 15,000 m² y equipamiento de vanguardia</p>
+                                    <span class="project-category">Salud</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <button class="carousel-arrow carousel-arrow-right" aria-label="Proyecto siguiente">❯</button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Project Modal -->
+    <div id="projectModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2 id="modalTitle">Título del Proyecto</h2>
+                <button class="modal-close">&times;</button>
+            </div>
+            <div class="modal-body">
+                <div class="modal-gallery">
+                    <div class="gallery-container">
+                        <div class="gallery-track" id="galleryTrack">
+                            <!-- Las imágenes se cargarán dinámicamente -->
+                        </div>
+                        <button class="gallery-prev">❮</button>
+                        <button class="gallery-next">❯</button>
+                    </div>
+                    <div class="gallery-dots" id="galleryDots"></div>
+                </div>
+                <div class="modal-info">
+                    <div class="project-details">
+                        <div class="detail-item">
+                            <h4>📍 Ubicación</h4>
+                            <p id="modalLocation">Ubicación del proyecto</p>
+                        </div>
+                        <div class="detail-item">
+                            <h4>📏 Área</h4>
+                            <p id="modalArea">Área del proyecto</p>
+                        </div>
+                        <div class="detail-item">
+                            <h4>📅 Año</h4>
+                            <p id="modalYear">Año de construcción</p>
+                        </div>
+                        <div class="detail-item">
+                            <h4>💰 Inversión</h4>
+                            <p id="modalInvestment">Monto de inversión</p>
+                        </div>
+                        <div class="detail-item">
+                            <h4>⏱️ Duración</h4>
+                            <p id="modalDuration">Tiempo de construcción</p>
+                        </div>
+                        <div class="detail-item">
+                            <h4>🏆 Certificaciones</h4>
+                            <p id="modalCertifications">Certificaciones obtenidas</p>
+                        </div>
+                    </div>
+                    <div class="project-description">
+                        <h4>📋 Descripción del Proyecto</h4>
+                        <p id="modalDescription">Descripción detallada del proyecto</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <!-- About Us Section -->
+    <section id="nosotros" class="about" style="padding: 50px;">
+        <div class="container">
+            <div class="about-content">
+                <div class="about-text">
+                    <div class="section-header">
+                        <h2>Sobre Nosotros</h2>
+                        <p>Más de 15 años construyendo confianza</p>
+                    </div>
+                    <div class="about-description">
+                        <p>En Alterno Constructora, nos especializamos en transformar visiones en realidades tangibles.
+                            Desde nuestros inicios, hemos mantenido un compromiso inquebrantable con la excelencia, la
+                            innovación y la satisfacción del cliente.</p>
+                        <p>Nuestro enfoque integral abarca desde el diseño conceptual hasta la entrega final,
+                            garantizando que cada proyecto refleje los más altos estándares de calidad y funcionalidad.
+                        </p>
+                    </div>
+                    <div class="stats">
+                        <div class="stat">
+                            <h3>200+</h3>
+                            <p>Proyectos Completados</p>
+                        </div>
+                        <div class="stat">
+                            <h3>15+</h3>
+                            <p>Años de Experiencia</p>
+                        </div>
+                        <div class="stat">
+                            <h3>98%</h3>
+                            <p>Satisfacción del Cliente</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="about-image">
+                    <div class="about-placeholder"></div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Engineers Team Section -->
+    <section id="ingenieros" class="engineers">
+        <div class="container">
+            <div class="section-header">
+                <h2>Nuestro Equipo de Ingenieros</h2>
+                <p>Profesionales altamente calificados comprometidos con la excelencia</p>
+            </div>
+            <div class="engineers-grid">
+                <div class="engineer-card">
+                    <div class="engineer-avatar"></div>
+                    <h3>Ing. María González</h3>
+                    <p class="engineer-title">Directora de Proyectos</p>
+                    <p class="engineer-description">15 años de experiencia en gestión de proyectos de gran escala</p>
+                </div>
+                <div class="engineer-card">
+                    <div class="engineer-avatar"></div>
+                    <h3>Ing. Carlos Rodríguez</h3>
+                    <p class="engineer-title">Ingeniero Estructural</p>
+                    <p class="engineer-description">Especialista en estructuras complejas y diseño antisísmico</p>
+                </div>
+                <div class="engineer-card">
+                    <div class="engineer-avatar"></div>
+                    <h3>Arq. Ana Martínez</h3>
+                    <p class="engineer-title">Arquitecta Principal</p>
+                    <p class="engineer-description">Experta en diseño sustentable y arquitectura contemporánea</p>
+                </div>
+                <div class="engineer-card">
+                    <div class="engineer-avatar"></div>
+                    <h3>Ing. Roberto Silva</h3>
+                    <p class="engineer-title">Ingeniero Civil</p>
+                    <p class="engineer-description">Especializado en infraestructura urbana y obras civiles</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contacto" class="contact">
+        <div class="container">
+            <div class="contact-content">
+                <div class="contact-info">
+                    <div class="section-header">
+                        <h2>Contáctanos</h2>
+                        <p>Estamos listos para hacer realidad tu próximo proyecto</p>
+                    </div>
+                    <div class="contact-details">
+                        <div class="contact-item">
+                            <div class="contact-icon">📍</div>
+                            <div>
+                                <h4>Dirección</h4>
+                                <p>Av. Construcción 123, Ciudad de México</p>
+                            </div>
+                        </div>
+                        <div class="contact-item">
+                            <div class="contact-icon">📞</div>
+                            <div>
+                                <h4>Teléfono</h4>
+                                <p>+52 55 1234 5678</p>
+                            </div>
+                        </div>
+                        <div class="contact-item">
+                            <div class="contact-icon">✉️</div>
+                            <div>
+                                <h4>Email</h4>
+                                <p>contacto@alternoconstructora.com</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="contact-form">
+                    <form id="contactForm">
+                        <div class="form-group">
+                            <input type="text" id="name" name="name" placeholder="Nombre completo" required>
+                        </div>
+                        <div class="form-group">
+                            <input type="email" id="email" name="email" placeholder="Correo electrónico" required>
+                        </div>
+                        <div class="form-group">
+                            <input type="tel" id="phone" name="phone" placeholder="Teléfono">
+                        </div>
+                        <div class="form-group">
+                            <select id="service" name="service" required>
+                                <option value="">Selecciona un servicio</option>
+                                <option value="residencial">Construcción Residencial</option>
+                                <option value="comercial">Construcción Comercial</option>
+                                <option value="diseno">Diseño Arquitectónico</option>
+                                <option value="remodelacion">Remodelaciones</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <textarea id="message" name="message" placeholder="Cuéntanos sobre tu proyecto" rows="4"
+                                required></textarea>
+                        </div>
+                        <button type="submit" class="btn btn-primary btn-full">Enviar Mensaje</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-logo">
+                    <h3>Alterno Constructora</h3>
+                    <p>Construyendo el futuro, un proyecto a la vez</p>
+                </div>
+                <div class="footer-links">
+                    <h4>Enlaces</h4>
+                    <ul>
+                        <li><a href="#servicios">Servicios</a></li>
+                        <li><a href="#proyectos">Proyectos</a></li>
+                        <li><a href="#nosotros">Nosotros</a></li>
+                        <li><a href="#contacto">Contacto</a></li>
+                    </ul>
+                </div>
+                <div class="footer-social">
+                    <h4>Síguenos</h4>
+                    <div class="social-links">
+                        <a href="#" class="social-link">Facebook</a>
+                        <a href="#" class="social-link">Instagram</a>
+                        <a href="#" class="social-link">LinkedIn</a>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2024 Alterno Constructora. Todos los derechos reservados.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+
+</html>
