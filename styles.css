@@ -44,19 +44,39 @@ body {
   height: 70px;
 }
 
-.nav-logo h2 {
+/* Logo con imagen + texto */
+.nav-logo {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.logo-img {
+  height: 90px;
+  width: auto;
+}
+
+.logo-text {
+  display: flex;
+  flex-direction: column;
+  line-height: 1;
+}
+
+.logo-text h2 {
+  margin: 0;
   font-size: 1.8rem;
   font-weight: 700;
   color: #2c3e50;
-  margin-bottom: -5px;
 }
 
-.nav-logo span {
+.logo-text span {
+  margin: 0;
   font-size: 0.9rem;
   color: #7f8c8d;
   font-weight: 300;
 }
 
+/* Menú */
 .nav-menu {
   display: flex;
   list-style: none;
@@ -92,6 +112,7 @@ body {
   color: #3498db;
 }
 
+/* Hamburguesa */
 .hamburger {
   display: none;
   flex-direction: column;
@@ -106,26 +127,43 @@ body {
   transition: 0.3s;
 }
 
+
 /* Hero Section */
 .hero {
+  position: relative;
+  overflow: hidden;
   min-height: 100vh;
+  width: 100vw;
+  /* Asegura que use todo el ancho de la pantalla */
+  padding: 100px 20px 50px;
   display: flex;
   align-items: center;
   justify-content: center;
-  padding: 100px 20px 50px;
-  background: #f8f9fa;
-  position: relative;
-  overflow: hidden;
+}
+
+.background-video {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  object-fit: cover;
+  z-index: 0;
+  pointer-events: none;
+  opacity: 0.7;
 }
 
 .hero-container {
-  max-width: 1200px;
-  width: 100%;
+  width: 100vw;
+  max-width: 100vw;
   display: grid;
   grid-template-columns: 2fr 1fr;
   gap: 4rem;
   align-items: center;
   position: relative;
+  padding: 0 40px;
+  /* opcional para no pegar los textos a los bordes */
+  z-index: 1;
 }
 
 .hero-main-content {

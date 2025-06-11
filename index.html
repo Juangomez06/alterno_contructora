@@ -12,10 +12,17 @@
     <!-- Navigation -->
     <nav class="navbar" id="navbar">
         <div class="nav-container">
+
+            <!-- Logo con imagen + texto -->
             <div class="nav-logo">
-                <h2>Alterno</h2>
-                <span>Constructora</span>
+                <img src="/assets/logo_alterno.png" alt="Logo Alterno" class="logo-img" />
+                <div class="logo-text">
+                    <h2>Alterno</h2>
+                    <span>Constructora</span>
+                </div>
             </div>
+
+            <!-- Menú de navegación -->
             <ul class="nav-menu" id="nav-menu">
                 <li class="nav-item">
                     <a href="#inicio" class="nav-link active" data-section="inicio">Inicio</a>
@@ -36,21 +43,33 @@
                     <a href="#contacto" class="nav-link" data-section="contacto">Contacto</a>
                 </li>
             </ul>
+
+            <!-- Botón hamburguesa (mobile) -->
             <div class="hamburger" id="hamburger">
                 <span class="bar"></span>
                 <span class="bar"></span>
                 <span class="bar"></span>
             </div>
+
         </div>
     </nav>
 
+
     <!-- Hero Section -->
     <section id="inicio" class="hero">
+
+        <!-- Video de fondo -->
+        <video autoplay muted loop playsinline class="background-video">
+            <source src="/assets/obreros_trabajando.mp4" type="video/mp4">
+        </video>
+
         <div class="hero-container">
+
             <!-- Contenido Principal -->
             <div class="hero-main-content">
                 <h1 class="hero-title">Construimos tu <span class="highlight">Futuro</span></h1>
-                <p class="hero-subtitle">Transformamos ideas en realidades arquitectónicas con excelencia, innovación y
+                <p class="hero-subtitle" style="color: white;">Transformamos ideas en realidades arquitectónicas con
+                    excelencia, innovación y
                     compromiso</p>
                 <div class="hero-buttons">
                     <a href="#proyectos" class="btn btn-primary">Ver Proyectos</a>
