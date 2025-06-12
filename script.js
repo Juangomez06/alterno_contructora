@@ -133,7 +133,7 @@ document.addEventListener("DOMContentLoaded", () => {
       card.style.transitionDelay = `${index * 0.1}s`
     })
 
-    // Project cards
+    // Project cards - Updated for new carousel
     document.querySelectorAll(".project-card").forEach((card, index) => {
       card.classList.add("scroll-reveal-scale")
       card.style.transitionDelay = `${index * 0.15}s`
@@ -177,41 +177,43 @@ document.addEventListener("DOMContentLoaded", () => {
 
   // Contact form handling
   const contactForm = document.getElementById("contactForm")
-  contactForm.addEventListener("submit", (e) => {
-    e.preventDefault()
+  if (contactForm) {
+    contactForm.addEventListener("submit", (e) => {
+      e.preventDefault()
 
-    // Get form data
-    const formData = new FormData(contactForm)
-    const data = Object.fromEntries(formData)
+      // Get form data
+      const formData = new FormData(contactForm)
+      const data = Object.fromEntries(formData)
 
-    // Simple validation
-    if (!data.name || !data.email || !data.service || !data.message) {
-      alert("Por favor, completa todos los campos requeridos.")
-      return
-    }
+      // Simple validation
+      if (!data.name || !data.email || !data.service || !data.message) {
+        alert("Por favor, completa todos los campos requeridos.")
+        return
+      }
 
-    // Email validation
-    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
-    if (!emailRegex.test(data.email)) {
-      alert("Por favor, ingresa un email válido.")
-      return
-    }
+      // Email validation
+      const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
+      if (!emailRegex.test(data.email)) {
+        alert("Por favor, ingresa un email válido.")
+        return
+      }
 
-    // Simulate form submission
-    const submitButton = contactForm.querySelector('button[type="submit"]')
-    const originalText = submitButton.textContent
+      // Simulate form submission
+      const submitButton = contactForm.querySelector('button[type="submit"]')
+      const originalText = submitButton.textContent
 
-    submitButton.textContent = "Enviando..."
-    submitButton.disabled = true
+      submitButton.textContent = "Enviando..."
+      submitButton.disabled = true
 
-    // Simulate API call
-    setTimeout(() => {
-      alert("¡Gracias por tu mensaje! Nos pondremos en contacto contigo pronto.")
-      contactForm.reset()
-      submitButton.textContent = originalText
-      submitButton.disabled = false
-    }, 2000)
-  })
+      // Simulate API call
+      setTimeout(() => {
+        alert("¡Gracias por tu mensaje! Nos pondremos en contacto contigo pronto.")
+        contactForm.reset()
+        submitButton.textContent = originalText
+        submitButton.disabled = false
+      }, 2000)
+    })
+  }
 
   // Counter animation for stats section
   function animateStatsCounters() {
@@ -256,90 +258,194 @@ document.addEventListener("DOMContentLoaded", () => {
     statsObserver.observe(statsSection)
   }
 
-  // Projects Carousel functionality
-  function initProjectsCarousel() {
-    const track = document.querySelector(".projects-track")
-    const slides = document.querySelectorAll(".project-slide")
-    const prevButton = document.querySelector(".carousel-arrow-left")
-    const nextButton = document.querySelector(".carousel-arrow-right")
-
-    if (!track || slides.length === 0) return
-
-    let currentIndex = 0
-    const totalSlides = slides.length
-
-    // Function to get slides to show based on screen width
-    function getSlidesToShow() {
-      if (window.innerWidth <= 768) {
-        return 1 // Show 1 slide on mobile
-      } else if (window.innerWidth <= 1024) {
-        return 2 // Show 2 slides on tablet
+  // NEW: Card Carousel 2D Class - Updated Projects Carousel functionality
+  class CardCarousel {
+    constructor() {
+      this.track = document.querySelector('.projects-track');
+      this.slides = document.querySelectorAll('.project-slide');
+      this.leftArrow = document.querySelector('.carousel-arrow-left');
+      this.rightArrow = document.querySelector('.carousel-arrow-right');
+      this.progressDots = document.querySelectorAll('.progress-dot');
+      
+      // Only initialize if elements exist
+      if (!this.track || !this.slides.length) return;
+      
+      this.currentSlide = 0;
+      this.totalSlides = this.slides.length;
+      this.autoPlayInterval = null;
+      this.autoPlayDelay = 4000; // 4 segundos
+      this.isAutoPlaying = true;
+      
+      this.init();
+    }
+    
+    init() {
+      this.setupEventListeners();
+      this.startAutoPlay();
+      this.updateCarousel();
+    }
+    
+    setupEventListeners() {
+      // Botones de navegación
+      if (this.leftArrow) {
+        this.leftArrow.addEventListener('click', () => {
+          this.pauseAutoPlay();
+          this.prevSlide();
+          this.resumeAutoPlay();
+        });
       }
-      return 3 // Show 3 slides on desktop
-    }
-
-    let slidesToShow = getSlidesToShow()
-
-    // Set initial position
-    updateCarousel()
-
-    // Event listeners
-    prevButton.addEventListener("click", () => {
-      currentIndex = (currentIndex - 1 + totalSlides) % totalSlides
-      updateCarousel()
-      resetInterval()
-    })
-
-    nextButton.addEventListener("click", () => {
-      currentIndex = (currentIndex + 1) % totalSlides
-      updateCarousel()
-      resetInterval()
-    })
-
-    // Auto advance carousel
-    let interval = setInterval(() => {
-      currentIndex = (currentIndex + 1) % totalSlides
-      updateCarousel()
-    }, 4000)
-
-    // Function to reset interval
-    function resetInterval() {
-      clearInterval(interval)
-      interval = setInterval(() => {
-        currentIndex = (currentIndex + 1) % totalSlides
-        updateCarousel()
-      }, 4000)
-    }
-
-    // Pause on hover
-    track.addEventListener("mouseenter", () => clearInterval(interval))
-    track.addEventListener("mouseleave", () => {
-      resetInterval()
-    })
-
-    // Update carousel position
-    function updateCarousel() {
-      const slideWidth = 100 / slidesToShow
-      track.style.transform = `translateX(-${currentIndex * slideWidth}%)`
-    }
-
-    // Handle window resize
-    let resizeTimeout
-    window.addEventListener("resize", () => {
-      clearTimeout(resizeTimeout)
-      resizeTimeout = setTimeout(() => {
-        const newSlidesToShow = getSlidesToShow()
-        if (newSlidesToShow !== slidesToShow) {
-          slidesToShow = newSlidesToShow
-          // Reset to first slide on resize to avoid layout issues
-          currentIndex = 0
-          updateCarousel()
+      
+      if (this.rightArrow) {
+        this.rightArrow.addEventListener('click', () => {
+          this.pauseAutoPlay();
+          this.nextSlide();
+          this.resumeAutoPlay();
+        });
+      }
+      
+      // Indicadores de progreso
+      this.progressDots.forEach((dot, index) => {
+        dot.addEventListener('click', () => {
+          this.pauseAutoPlay();
+          this.goToSlide(index);
+          this.resumeAutoPlay();
+        });
+      });
+      
+      // Pausar autoplay al hacer hover
+      const carousel = document.querySelector('.projects-carousel-container');
+      if (carousel) {
+        carousel.addEventListener('mouseenter', () => this.pauseAutoPlay());
+        carousel.addEventListener('mouseleave', () => this.resumeAutoPlay());
+      }
+      
+      // Soporte para gestos táctiles
+      this.setupTouchEvents();
+      
+      // Pausar autoplay cuando la pestaña no está visible
+      document.addEventListener('visibilitychange', () => {
+        if (document.hidden) {
+          this.pauseAutoPlay();
+        } else if (this.isAutoPlaying) {
+          this.resumeAutoPlay();
         }
-      }, 250)
-    })
+      });
+    }
+    
+    setupTouchEvents() {
+      let startX = 0;
+      let currentX = 0;
+      let isDragging = false;
+      
+      this.track.addEventListener('touchstart', (e) => {
+        startX = e.touches[0].clientX;
+        isDragging = true;
+        this.pauseAutoPlay();
+      });
+      
+      this.track.addEventListener('touchmove', (e) => {
+        if (!isDragging) return;
+        currentX = e.touches[0].clientX;
+      });
+      
+      this.track.addEventListener('touchend', () => {
+        if (!isDragging) return;
+        isDragging = false;
+        
+        const diffX = startX - currentX;
+        const threshold = 50;
+        
+        if (Math.abs(diffX) > threshold) {
+          if (diffX > 0) {
+            this.nextSlide();
+          } else {
+            this.prevSlide();
+          }
+        }
+        
+        this.resumeAutoPlay();
+      });
+    }
+    
+    nextSlide() {
+      this.currentSlide = (this.currentSlide + 1) % this.totalSlides;
+      this.updateCarousel();
+    }
+    
+    prevSlide() {
+      this.currentSlide = (this.currentSlide - 1 + this.totalSlides) % this.totalSlides;
+      this.updateCarousel();
+    }
+    
+    goToSlide(index) {
+      this.currentSlide = index;
+      this.updateCarousel();
+    }
+    
+    updateCarousel() {
+      // Mover el track
+      const translateX = -this.currentSlide * 100;
+      this.track.style.transform = `translateX(${translateX}%)`;
+      
+      // Actualizar indicadores de progreso
+      this.progressDots.forEach((dot, index) => {
+        dot.classList.toggle('active', index === this.currentSlide);
+      });
+      
+      // Actualizar escala de las tarjetas para efecto 2D
+      this.slides.forEach((slide, index) => {
+        const card = slide.querySelector('.project-card');
+        if (card) {
+          if (index === this.currentSlide) {
+            card.style.transform = 'scale(1)';
+            card.style.opacity = '1';
+          } else {
+            card.style.transform = 'scale(0.95)';
+            card.style.opacity = '0.8';
+          }
+        }
+      });
+    }
+    
+    startAutoPlay() {
+      if (this.autoPlayInterval) return;
+      
+      this.autoPlayInterval = setInterval(() => {
+        this.nextSlide();
+      }, this.autoPlayDelay);
+    }
+    
+    pauseAutoPlay() {
+      if (this.autoPlayInterval) {
+        clearInterval(this.autoPlayInterval);
+        this.autoPlayInterval = null;
+      }
+    }
+    
+    resumeAutoPlay() {
+      if (this.isAutoPlaying) {
+        setTimeout(() => {
+          this.startAutoPlay();
+        }, 1000); // Esperar 1 segundo antes de reanudar
+      }
+    }
+    
+    toggleAutoPlay() {
+      this.isAutoPlaying = !this.isAutoPlaying;
+      if (this.isAutoPlaying) {
+        this.startAutoPlay();
+      } else {
+        this.pauseAutoPlay();
+      }
+    }
   }
 
-  // Project data
+  // Initialize new carousel
+  function initProjectsCarousel() {
+    new CardCarousel();
+  }
+
+  // Project data - Maintained for modal functionality
   const projectsData = {
     0: {
       title: "Residencial Vista Verde",
@@ -391,11 +497,13 @@ document.addEventListener("DOMContentLoaded", () => {
     },
   }
 
-  // Modal functionality
+  // Modal functionality - Maintained for project details
   function initModal() {
     const modal = document.getElementById("projectModal")
     const projectCards = document.querySelectorAll(".project-card")
     const closeBtn = document.querySelector(".modal-close")
+
+    if (!modal) return; // Exit if modal doesn't exist
 
     // Open modal when clicking on project card
     projectCards.forEach((card) => {
@@ -406,7 +514,10 @@ document.addEventListener("DOMContentLoaded", () => {
     })
 
     // Close modal
-    closeBtn.addEventListener("click", closeModal)
+    if (closeBtn) {
+      closeBtn.addEventListener("click", closeModal)
+    }
+    
     modal.addEventListener("click", (e) => {
       if (e.target === modal) {
         closeModal()
@@ -425,14 +536,23 @@ document.addEventListener("DOMContentLoaded", () => {
       if (!project) return
 
       // Update modal content
-      document.getElementById("modalTitle").textContent = project.title
-      document.getElementById("modalLocation").textContent = project.location
-      document.getElementById("modalArea").textContent = project.area
-      document.getElementById("modalYear").textContent = project.year
-      document.getElementById("modalInvestment").textContent = project.investment
-      document.getElementById("modalDuration").textContent = project.duration
-      document.getElementById("modalCertifications").textContent = project.certifications
-      document.getElementById("modalDescription").textContent = project.description
+      const modalTitle = document.getElementById("modalTitle")
+      const modalLocation = document.getElementById("modalLocation")
+      const modalArea = document.getElementById("modalArea")
+      const modalYear = document.getElementById("modalYear")
+      const modalInvestment = document.getElementById("modalInvestment")
+      const modalDuration = document.getElementById("modalDuration")
+      const modalCertifications = document.getElementById("modalCertifications")
+      const modalDescription = document.getElementById("modalDescription")
+
+      if (modalTitle) modalTitle.textContent = project.title
+      if (modalLocation) modalLocation.textContent = project.location
+      if (modalArea) modalArea.textContent = project.area
+      if (modalYear) modalYear.textContent = project.year
+      if (modalInvestment) modalInvestment.textContent = project.investment
+      if (modalDuration) modalDuration.textContent = project.duration
+      if (modalCertifications) modalCertifications.textContent = project.certifications
+      if (modalDescription) modalDescription.textContent = project.description
 
       // Setup gallery
       setupGallery(project.images)
@@ -448,12 +568,14 @@ document.addEventListener("DOMContentLoaded", () => {
     }
   }
 
-  // Gallery functionality
+  // Gallery functionality - Maintained for modal gallery
   function setupGallery(images) {
     const galleryTrack = document.getElementById("galleryTrack")
     const galleryDots = document.getElementById("galleryDots")
     const prevBtn = document.querySelector(".gallery-prev")
     const nextBtn = document.querySelector(".gallery-next")
+
+    if (!galleryTrack || !galleryDots) return; // Exit if elements don't exist
 
     let currentSlide = 0
 
@@ -478,15 +600,19 @@ document.addEventListener("DOMContentLoaded", () => {
     const dots = galleryDots.querySelectorAll(".gallery-dot")
 
     // Navigation
-    prevBtn.addEventListener("click", () => {
-      currentSlide = (currentSlide - 1 + slides.length) % slides.length
-      updateGallery()
-    })
+    if (prevBtn) {
+      prevBtn.addEventListener("click", () => {
+        currentSlide = (currentSlide - 1 + slides.length) % slides.length
+        updateGallery()
+      })
+    }
 
-    nextBtn.addEventListener("click", () => {
-      currentSlide = (currentSlide + 1) % slides.length
-      updateGallery()
-    })
+    if (nextBtn) {
+      nextBtn.addEventListener("click", () => {
+        currentSlide = (currentSlide + 1) % slides.length
+        updateGallery()
+      })
+    }
 
     function goToSlide(index) {
       currentSlide = index
@@ -517,12 +643,12 @@ document.addEventListener("DOMContentLoaded", () => {
     })
   }
 
-  // Initialize
+  // Initialize all functionality
   addScrollRevealClasses()
   updateActiveNavLink()
   updateNavbarBackground()
   revealOnScroll()
-  initProjectsCarousel()
+  initProjectsCarousel() // Now uses the new CardCarousel class
   initModal()
 
   // Add loading animation

@@ -406,154 +406,232 @@ body {
   line-height: 1.6;
 }
 
-/* Projects Section */
-.projects {
-  padding: 100px 0;
-  background: #f8f9fa;
-}
+ /* Carousel Container */
+        .projects-carousel-container {
+            position: relative;
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 40px 0;
+        }
 
-/* Projects Carousel */
-.projects-carousel-container {
-  position: relative;
-  max-width: 1200px;
-  margin: 0 auto;
-}
+        .projects-carousel {
+            overflow: hidden;
+            border-radius: 20px;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+        }
 
-.projects-carousel {
-  overflow: hidden;
-  margin: 0 60px;
-}
+        .projects-track {
+            display: flex;
+            transition: transform 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+            will-change: transform;
+        }
 
-.projects-track {
-  display: flex;
-  transition: transform 0.8s ease;
-}
+        /* Project Slides */
+        .project-slide {
+            min-width: 100%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+        }
 
-.project-slide {
-  min-width: calc(33.333% - 20px);
-  margin: 0 10px;
-  flex-shrink: 0;
-}
+        .project-card {
+            background: white;
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: 0 15px 35px rgba(0,0,0,0.1);
+            transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+            max-width: 800px;
+            width: 100%;
+            cursor: pointer;
+            transform: scale(0.95);
+            opacity: 0.8;
+        }
 
-.project-card {
-  background: white;
-  border-radius: 15px;
-  overflow: hidden;
-  transition: all 0.3s ease;
-  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.08);
-  height: 400px;
-  cursor: pointer;
-  display: flex;
-  flex-direction: column;
-  width: 100%;
-  max-width: 520px;
-  margin: 0 auto;
-}
+        .project-slide:first-child .project-card {
+            transform: scale(1);
+            opacity: 1;
+        }
 
-.project-card:hover {
-  transform: translateY(-5px);
-  box-shadow: 0 15px 35px rgba(0, 0, 0, 0.15);
-}
+        .project-card:hover {
+            transform: scale(1.02) translateY(-10px);
+            box-shadow: 0 25px 50px rgba(0,0,0,0.15);
+        }
 
-.project-image {
-  height: 220px;
-  position: relative;
-  background-size: cover;
-  background-position: center;
-  flex-shrink: 0;
-}
+        .project-image {
+            height: 300px;
+            background-size: cover;
+            background-position: center;
+            position: relative;
+            overflow: hidden;
+        }
 
-.project-image-1 {
-  background: linear-gradient(45deg, #27ae60, #2ecc71);
-}
+        .project-image::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(45deg, rgba(0,0,0,0.3), transparent);
+            transition: opacity 0.3s ease;
+        }
 
-.project-image-2 {
-  background: linear-gradient(45deg, #3498db, #2980b9);
-}
+        .project-card:hover .project-image::before {
+            opacity: 0.7;
+        }
 
-.project-image-3 {
-  background: linear-gradient(45deg, #8e44ad, #9b59b6);
-}
+        /* Project Images */
+        .project-image-1 {
+            background: linear-gradient(45deg, #667eea, #764ba2), url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 300"><rect fill="%23667eea" width="400" height="300"/><text x="200" y="150" text-anchor="middle" fill="white" font-size="24" font-family="Arial">Residencial</text></svg>');
+        }
 
-.project-image-4 {
-  background: linear-gradient(45deg, #e74c3c, #c0392b);
-}
+        .project-image-2 {
+            background: linear-gradient(45deg, #f093fb, #f5576c), url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 300"><rect fill="%23f093fb" width="400" height="300"/><text x="200" y="150" text-anchor="middle" fill="white" font-size="24" font-family="Arial">Comercial</text></svg>');
+        }
 
-.project-image::before {
-  content: "🏢";
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  font-size: 3rem;
-  opacity: 0.3;
-}
+        .project-image-3 {
+            background: linear-gradient(45deg, #4facfe, #00f2fe), url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 300"><rect fill="%234facfe" width="400" height="300"/><text x="200" y="150" text-anchor="middle" fill="white" font-size="24" font-family="Arial">Corporativo</text></svg>');
+        }
 
-.project-info {
-  padding: 1.5rem;
-  flex-grow: 1;
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-}
+        .project-image-4 {
+            background: linear-gradient(45deg, #43e97b, #38f9d7), url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 300"><rect fill="%2343e97b" width="400" height="300"/><text x="200" y="150" text-anchor="middle" fill="white" font-size="24" font-family="Arial">Salud</text></svg>');
+        }
 
-.project-info h3 {
-  font-size: 1.3rem;
-  font-weight: 600;
-  color: #2c3e50;
-  margin-bottom: 0.5rem;
-}
+        .project-info {
+            padding: 30px;
+            text-align: center;
+        }
 
-.project-info p {
-  color: #7f8c8d;
-  margin-bottom: 1rem;
-  line-height: 1.6;
-  flex-grow: 1;
-}
+        .project-info h3 {
+            font-size: 1.8rem;
+            color: #2c3e50;
+            margin-bottom: 15px;
+            font-weight: 600;
+        }
 
-.project-category {
-  background: #3498db;
-  color: white;
-  padding: 0.3rem 1rem;
-  border-radius: 20px;
-  font-size: 0.8rem;
-  font-weight: 500;
-  align-self: flex-start;
-}
+        .project-info p {
+            color: #7f8c8d;
+            line-height: 1.6;
+            margin-bottom: 20px;
+            font-size: 1rem;
+        }
 
+        .project-category {
+            display: inline-block;
+            background: linear-gradient(45deg, #667eea, #764ba2);
+            color: white;
+            padding: 8px 20px;
+            border-radius: 25px;
+            font-size: 0.9rem;
+            font-weight: 500;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
 
-/* Carousel Arrows */
-.carousel-arrow {
-  position: absolute;
-  top: 50%;
-  transform: translateY(-50%);
-  background: rgba(52, 152, 219, 0.9);
-  color: white;
-  border: none;
-  width: 50px;
-  height: 50px;
-  border-radius: 50%;
-  font-size: 1.5rem;
-  cursor: pointer;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  transition: all 0.3s ease;
-  z-index: 10;
-}
+        /* Carousel Arrows */
+        .carousel-arrow {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            background: rgba(255,255,255,0.9);
+            border: none;
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            font-size: 1.5rem;
+            color: #2c3e50;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            z-index: 10;
+            backdrop-filter: blur(10px);
+        }
 
-.carousel-arrow:hover {
-  background: #2980b9;
-  transform: translateY(-50%) scale(1.1);
-}
+        .carousel-arrow:hover {
+            background: white;
+            transform: translateY(-50%) scale(1.1);
+            box-shadow: 0 8px 25px rgba(0,0,0,0.15);
+        }
 
-.carousel-arrow-left {
-  left: 0;
-}
+        .carousel-arrow-left {
+            left: -30px;
+        }
 
-.carousel-arrow-right {
-  right: 0;
-}
+        .carousel-arrow-right {
+            right: -30px;
+        }
+
+        /* Auto-play indicator */
+        .carousel-progress {
+            position: absolute;
+            bottom: -40px;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            gap: 10px;
+        }
+
+        .progress-dot {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            background: rgba(255,255,255,0.5);
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .progress-dot.active {
+            background: white;
+            transform: scale(1.2);
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .section-header h2 {
+                font-size: 2rem;
+            }
+
+            .project-card {
+                margin: 0 10px;
+            }
+
+            .project-info {
+                padding: 20px;
+            }
+
+            .project-info h3 {
+                font-size: 1.4rem;
+            }
+
+            .carousel-arrow {
+                width: 50px;
+                height: 50px;
+                font-size: 1.2rem;
+            }
+
+            .carousel-arrow-left {
+                left: -25px;
+            }
+
+            .carousel-arrow-right {
+                right: -25px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .projects {
+                padding: 20px;
+            }
+
+            .project-image {
+                height: 200px;
+            }
+
+            .carousel-arrow {
+                display: none;
+            }
+        }
 
 /* Modal Styles */
 .modal {
